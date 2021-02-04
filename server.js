@@ -6,7 +6,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json())
 
 
-app.post('/teste', (req, res) => {
+app.get('/teste', (req, res) => {
     res.json()
 })
 
