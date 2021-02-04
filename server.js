@@ -8,7 +8,7 @@ app.use(bodyParser.json())
 
 app.post('/teste', (req, res) => {
 
-    const intentName = req.body.queryResult.outputContexts.parameters;
+    const intentName = req.body.queryResult.outputContexts.param-name;
     
     if (intentName == 'kit.grande'){
         res.json({"fulfillmentText": "Primeiro Webhook"})
