@@ -7,9 +7,16 @@ app.use(bodyParser.json())
 
 
 app.post('/teste', (req, res) => {
-    res.json({"fulfillmentText": "Primeiro Webhook"})
+
+    const intentName = req.body.queryResult.intent.displayName;
+    
+    if (intentName == 'kit.grande'){
+        res.json({"fulfillmentText": "Primeiro Webhook"})
+    }
+    
+    
 })
 
-app.listen(process.env.PORT,() =>{
+app.listen(process.env.PORT || 3005,() =>{
     console.log("Servidor ON")
 })
