@@ -6,8 +6,8 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json())
 
 
-app.get('/teste', (req, res) => {
-    res.json()
+app.post('/teste', (req, res) => {
+    res.json({"fulfillmentText": "Primeiro Webhook"})
 })
 
 app.listen(process.env.PORT,() =>{
