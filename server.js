@@ -13,6 +13,9 @@ app.post('/teste', (req, res) => {
     if (intentName == "kit.grande"){
         res.json({"fulfillmentText": "Primeiro Webhook"})
     }
+    else if (intentName == "kit.famila"){
+        res.json({"fulfillmentText": "Primeiro Webhook 2"})
+    }
     
     
 })
