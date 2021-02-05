@@ -10,14 +10,6 @@ app.use(bodyParser.json())
 
 
 app.post('/teste', (req, res) => {
-    let connection = mysql.createConnection({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASS,
-        database: process.env.MYSQL_DB
-    })
-    connection.connect();
-
 
     let intentName = req.body.queryResult.intent.displayName
 
@@ -34,22 +26,31 @@ app.post('/teste', (req, res) => {
                 let quantidade = req.body.queryResult.parameters['quantidade']
                 let data = req.body.queryResult.parameters['data']
 
-                let query = 'insert into solicitations values ("' + massas + '","' + recheio + '","' + kitGrande + '","' + nomeCliente + '","' + itemEndereco + '","' + quantidade + '","' + data + '")'
+                let connection = mysql.createConnection({
+                    host: process.env.MYSQL_HOST,
+                    user: process.env.MYSQL_USER,
+                    password: process.env.MYSQL_PASS,
+                    database: process.env.MYSQL_DB
+                })
+                connection.connect();
 
-                connection.query(query, (error) => {
-                    if (error) throw error
-                    connection.end();
+                connection.query("insert into edvaldodeveloper_cms.solicitations values ('"+massas+"','"+recheio+"','"+kitGrande+"','"+nomeCliente+"','"+itemEndereco+"','"+quantidade+"','"+data+"')",
+
+                function(error, results, fields){
+                    if(error) throw error;
+                    connection.end()
                     res.json({ "fulfillmentText": "Primeiro Webhook" });
                 })
+                
+                
 
             })
 
 
 
+        
 
-
-
-
+        
     }
     else if (intentName == "kit.famila") {
         res.json({ "fulfillmentText": "Primeiro Webhook 2" });
