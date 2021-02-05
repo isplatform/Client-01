@@ -20,7 +20,7 @@ app.post('/teste', (req, res) => {
             .then(endereco => {
                 let massas = req.body.queryResult.parameters['massas']
                 let recheio = req.body.queryResult.parameters['recheio']
-                let kitGrande = req.body.queryResult.parameters['kitGrande']
+                let nomeItem = req.body.queryResult.parameters['nomeItem']
                 let nomeCliente = req.body.queryResult.parameters['nomeCliente']
                 let itemEndereco = endereco.logradouro + "-" + endereco.bairro + "," + endereco.localidade + "-" + endereco.uf + "--" + endereco.cep
                 let quantidade = req.body.queryResult.parameters['quantidade']
@@ -34,28 +34,19 @@ app.post('/teste', (req, res) => {
                 })
                 connection.connect();
 
-                connection.query("insert into edvaldodeveloper_cms.solicitations values ('"+massas+"','"+recheio+"','"+kitGrande+"','"+nomeCliente+"','"+itemEndereco+"','"+quantidade+"','"+data+"')",
+                connection.query("insert into edvaldodeveloper_cms.solicitations values ('"+massas+"','"+recheio+"','"+nomeItem+"','"+nomeCliente+"','"+itemEndereco+"','"+quantidade+"','"+data+"')",
 
                 function(error, results, fields){
                     if(error) throw error;
                     connection.end()
                     res.json({ "fulfillmentText": "Primeiro Webhook" });
                 })
-                
-                
-
             })
-
-
-
-        
-
         
     }
     else if (intentName == "kit.famila") {
         res.json({ "fulfillmentText": "Primeiro Webhook 2" });
     }
-
 
 });
 
