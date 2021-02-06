@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 // const dialogflow = require('@google-cloud/dialogflow')
 // const uuid = require('uuid')
 let buscaCep = require('busca-cep');
-let mysql = require('mysql')
+let mysql = require('mysql2')
 require('dotenv').config()
 
 
