@@ -19,9 +19,12 @@ app.use(bodyParser.json())
 
 
 app.post('/teste', (req, res) => {
+
+
     let intentName = req.body.queryResult.intent.displayName
 
-    if (intentName == "kit.grande") {
+  
+    if (intentName == 'kit.grande') {
 
         let cep = req.body.queryResult.parameters['cep']
         buscaCep(cep, { sync: false, timeout: 1000 })
@@ -52,7 +55,7 @@ app.post('/teste', (req, res) => {
             })
 
     }
-    else if (intentName == "kit.famila") {
+    else if (intentName == 'kit.famila') {
         res.json({ "fulfillmentText": "Primeiro Webhook 2" });
     }
     res.json({ "fulfillmentText": "Primeiro Webhook teste" })
