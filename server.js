@@ -20,6 +20,15 @@ app.use(bodyParser.json())
 
 app.post('/teste', (req, res) => {
 
+    let connection = mysql.createConnection({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASS,
+        database: process.env.MYSQL_DB
+    })
+    connection.connect();
+
+
 
     let intentName = req.body.queryResult.intent.displayName
 
@@ -37,14 +46,7 @@ app.post('/teste', (req, res) => {
                 let quantidade = req.body.queryResult.parameters['quantidade']
                 let data = req.body.queryResult.parameters['data']
 
-                let connection = mysql.createConnection({
-                    host: process.env.MYSQL_HOST,
-                    user: process.env.MYSQL_USER,
-                    password: process.env.MYSQL_PASS,
-                    database: process.env.MYSQL_DB
-                })
-                connection.connect();
-
+                
                 connection.query("insert into solicitations values ('" + massas + "','" + recheio + "','" + nomeItem + "','" + nomeCliente + "','" + itemEndereco + "','" + quantidade + "','" + data + "')",
 
                     function (error, results, fields) {
