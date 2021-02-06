@@ -55,7 +55,7 @@ app.post('/teste', (req, res) => {
     else if (intentName == "kit.famila") {
         res.json({ "fulfillmentText": "Primeiro Webhook 2" });
     }
-    res.json({ "fulfillmentText": "Primeiro Webhook teste" })
+   
 });
 
 app.listen(process.env.PORT, () => {
