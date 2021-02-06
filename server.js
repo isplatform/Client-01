@@ -1,16 +1,24 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
+// const dialogflow = require('@google-cloud/dialogflow')
+// const uuid = require('uuid')
 let buscaCep = require('busca-cep');
 let mysql = require('mysql')
+require('dotenv').config()
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
+// const projectId = 'jmcriatividades-gapm';
+// const sessionId = uuid.v4();
+// const sessionClient = new dialogflow.SessionsClient();
+// const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId)
+// console.log(sessionPath)
+
 
 app.post('/teste', (req, res) => {
-
     let intentName = req.body.queryResult.intent.displayName
 
     if (intentName == "kit.grande") {
@@ -34,22 +42,23 @@ app.post('/teste', (req, res) => {
                 })
                 connection.connect();
 
-                connection.query("insert into edvaldodeveloper_cms.solicitations values ('"+massas+"','"+recheio+"','"+nomeItem+"','"+nomeCliente+"','"+itemEndereco+"','"+quantidade+"','"+data+"')",
+                connection.query("insert into edvaldodeveloper_cms.solicitations values ('" + massas + "','" + recheio + "','" + nomeItem + "','" + nomeCliente + "','" + itemEndereco + "','" + quantidade + "','" + data + "')",
 
-                function(error, results, fields){
-                    if(error) throw error;
-                    connection.end()
-                    res.json({ "fulfillmentText": "Primeiro Webhook" });
-                })
+                    function (error, results, fields) {
+                        if (error) throw error;
+                        connection.end()
+                        res.json({ "fulfillmentText": "Primeiro Webhook" });
+                    })
             })
-        
+
     }
     else if (intentName == "kit.famila") {
         res.json({ "fulfillmentText": "Primeiro Webhook 2" });
     }
-
+    res.json({ "fulfillmentText": "Primeiro Webhook teste" })
 });
 
-app.listen(process.env.PORT || 3005, () => {
+app.listen(process.env.PORT, () => {
     console.log("Servidor ON")
 });
+
